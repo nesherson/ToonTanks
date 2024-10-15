@@ -13,6 +13,10 @@ public:
 	ATankPawn();
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void Tick(float DeltaTime) override;
+	
+protected:
+	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -27,7 +31,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnRate;
 
-
+	APlayerController* PlayerControllerRef;
+	
 	void Move(float Value);
 	void Turn(float Value);
 };

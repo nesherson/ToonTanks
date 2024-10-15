@@ -15,6 +15,28 @@ ATankPawn::ATankPawn()
 	TurnRate = 65; 
 }
 
+void ATankPawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerControllerRef = Cast<APlayerController>(GetController());
+}
+
+void ATankPawn::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (PlayerControllerRef)
+	{
+		FHitResult HitResult;
+		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility,
+			false,
+			HitResult);
+
+		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 20, FColor::Red);
+	}
+}
+
 void ATankPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
