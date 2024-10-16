@@ -13,6 +13,7 @@ void ATurretPawn::BeginPlay()
 	Super::BeginPlay();
 	
 	TankPawnRef = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATurretPawn::CheckFireCondition, 2.f, true);
 }
  
 void ATurretPawn::Tick(float DeltaTime)
@@ -22,15 +23,22 @@ void ATurretPawn::Tick(float DeltaTime)
 	RotateTowardsTank();
 }
 
-
 void ATurretPawn::RotateTowardsTank() const
 {
-	if (!TankPawnRef)
-		return;
-	
-	const float Distance = FVector::Dist(GetActorLocation(), TankPawnRef->GetActorLocation());
-
-	if (Distance <= FireRange)
+	if (IsTankPawnInRange())
 		RotateTurret(TankPawnRef->GetActorLocation());
 }
 
+void ATurretPawn::CheckFireCondition()
+{
+	if (IsTankPawnInRange())
+		Fire();
+}
+
+bool ATurretPawn::IsTankPawnInRange() const
+{
+	if (!TankPawnRef)
+		return false;
+	
+	return FVector::Dist(GetActorLocation(), TankPawnRef->GetActorLocation()) <= FireRange;
+}
