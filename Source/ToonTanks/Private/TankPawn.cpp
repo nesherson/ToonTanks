@@ -33,7 +33,7 @@ void ATankPawn::Tick(float DeltaTime)
 			false,
 			HitResult);
 
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 20, FColor::Red);
+		RotateTurret(HitResult.ImpactPoint);
 	}
 }
 
@@ -51,7 +51,6 @@ void ATankPawn::Move(float Value)
 	DeltaVector.X = Value * UGameplayStatics::GetWorldDeltaSeconds(this) * Speed;
 	
 	AddActorLocalOffset(DeltaVector, true);
-	// UE_LOG(LogTemp, Display, TEXT("ATankPawn::Move -> %f"), test);	
 }
 
 void ATankPawn::Turn(float Value)
