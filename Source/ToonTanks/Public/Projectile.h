@@ -25,6 +25,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UProjectileMovementComponent* ProjectileMovementComp;
 
+	UPROPERTY(EditAnywhere)
+	float Damage;
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp,
 		AActor* OtherActor,
