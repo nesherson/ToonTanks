@@ -23,6 +23,12 @@ void ATurretPawn::Tick(float DeltaTime)
 	RotateTowardsTank();
 }
 
+void ATurretPawn::HandleDestruction()
+{
+	Super::HandleDestruction();
+	Destroy();
+}
+
 void ATurretPawn::RotateTowardsTank() const
 {
 	if (IsTankPawnInRange())

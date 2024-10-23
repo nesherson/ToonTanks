@@ -19,22 +19,34 @@ void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerControllerRef = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 void ATankPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (PlayerControllerRef)
+	if (TankPlayerController)
 	{
 		FHitResult HitResult;
-		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility,
+		TankPlayerController->GetHitResultUnderCursor(ECC_Visibility,
 			false,
 			HitResult);
 
 		RotateTurret(HitResult.ImpactPoint);
 	}
+}
+
+void ATankPawn::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
+APlayerController* ATankPawn::GetPlayerController() const
+{
+	return TankPlayerController;
 }
 
 void ATankPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

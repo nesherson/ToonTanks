@@ -14,6 +14,9 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+
+	void HandleDestruction();
+	APlayerController* GetPlayerController() const;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -31,7 +34,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnRate;
 
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
 	
 	void Move(float Value);
 	void Turn(float Value);

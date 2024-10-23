@@ -21,9 +21,9 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxHealth;
-
 	float Health;
-
+	class AToonTanksGameMode* ToonTanksGameMode;
+	
 	UFUNCTION()
 	void DamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser);
 };
