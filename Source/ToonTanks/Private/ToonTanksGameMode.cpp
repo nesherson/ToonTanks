@@ -5,14 +5,15 @@
 #include "TurretPawn.h"
 #include "Kismet/GameplayStatics.h"
 
+AToonTanksGameMode::AToonTanksGameMode()
+{
+	StartDelay = 3.f;
+}
 
 void AToonTanksGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
-	TankPawn = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
-	ToonTanksPlayerController = Cast<AToonTanksPlayerController>(
-		UGameplayStatics::GetPlayerController(this, 0));
+	HandleGameStart();
 }
 
 void AToonTanksGameMode::ActorDied(AActor* DeadActor)
@@ -30,4 +31,27 @@ void AToonTanksGameMode::ActorDied(AActor* DeadActor)
 		DestroyedTurretPawn->HandleDestruction();
 	}
 }
+
+void AToonTanksGameMode::HandleGameStart()
+{
+	TankPawn = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	ToonTanksPlayerController = Cast<AToonTanksPlayerController>(
+		UGameplayStatics::GetPlayerController(this, 0));
+
+	if (ToonTanksPlayerController)
+	{
+		ToonTanksPlayerController->SetPlayerEnabledState(false);
+
+		FTimerHandle PlayerEnableTimerHandle;
+		FTimerDelegate PlayerEnableTimerDelegate = FTimerDelegate::CreateUObject(ToonTanksPlayerController,
+			&AToonTanksPlayerController::SetPlayerEnabledState,
+			true);
+
+		GetWorldTimerManager().SetTimer(PlayerEnableTimerHandle,
+			PlayerEnableTimerDelegate,
+			StartDelay,
+			false);
+	}
+}
+
 
