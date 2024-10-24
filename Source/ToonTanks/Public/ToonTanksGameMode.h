@@ -17,4 +17,5 @@ protected:
 
 private:
 	class ATankPawn* TankPawn;
+	class AToonTanksPlayerController* ToonTanksPlayerController;
 };
