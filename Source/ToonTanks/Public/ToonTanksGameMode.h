@@ -13,6 +13,9 @@ public:
 	AToonTanksGameMode();
 	void ActorDied(AActor* DeadActor);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartGame();
+
 protected:
 	virtual void BeginPlay() override;
 
