@@ -16,6 +16,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartGame();
 
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void GameOver(bool bWonGame);	
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -23,6 +27,8 @@ private:
 	class ATankPawn* TankPawn;
 	class AToonTanksPlayerController* ToonTanksPlayerController;
 	float StartDelay;
+	int32 TargetTurrets;
 
 	void HandleGameStart();
+	int32 GetTargetTurretCount() const;
 };
