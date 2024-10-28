@@ -25,8 +25,14 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UProjectileMovementComponent* ProjectileMovementComp;
 
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	UParticleSystemComponent* TrailParticlesComp;
+
 	UPROPERTY(EditAnywhere)
 	float Damage;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UParticleSystem* HitParticle;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp,
