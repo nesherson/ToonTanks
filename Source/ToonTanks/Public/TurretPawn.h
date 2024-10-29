@@ -26,9 +26,8 @@ private:
 	class ATankPawn* TankPawnRef;
 	FTimerHandle FireRateTimerHandle;
 	float FireRate;
-
+	
 	void RotateTowardsTank() const;
 	void CheckFireCondition();
 	bool IsTankPawnInRange() const;
-	
 };

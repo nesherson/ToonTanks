@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
 #include "BasePawn.generated.h"
 
 UCLASS()
@@ -33,4 +31,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UParticleSystem* DeathParticle;
 };

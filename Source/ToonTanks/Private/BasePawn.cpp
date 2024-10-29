@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
 
 ABasePawn::ABasePawn()
 {
@@ -16,10 +17,13 @@ ABasePawn::ABasePawn()
 	TurretMeshComp->SetupAttachment(BaseMeshComp);
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMeshComp);
+	DeathParticle = CreateDefaultSubobject<UParticleSystem>(TEXT("Death Particle"));
 }
 
 void ABasePawn::HandleDestruction()
 {
+	if (DeathParticle)
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation(), GetActorRotation());
 }
 
 void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
