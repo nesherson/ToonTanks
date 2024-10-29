@@ -4,6 +4,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UProjectileMovementComponent;
+
 UCLASS()
 class TOONTANKS_API AProjectile : public AActor
 {
@@ -23,7 +25,7 @@ private:
 	UStaticMeshComponent* BaseMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
-	class UProjectileMovementComponent* ProjectileMovementComp;
+	UProjectileMovementComponent* ProjectileMovementComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	UParticleSystemComponent* TrailParticlesComp;
@@ -34,6 +36,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UParticleSystem* HitParticle;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* LaunchSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* HitSound;
+	
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp,
 		AActor* OtherActor,

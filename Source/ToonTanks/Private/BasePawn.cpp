@@ -17,13 +17,15 @@ ABasePawn::ABasePawn()
 	TurretMeshComp->SetupAttachment(BaseMeshComp);
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMeshComp);
-	DeathParticle = CreateDefaultSubobject<UParticleSystem>(TEXT("Death Particle"));
 }
 
 void ABasePawn::HandleDestruction()
 {
 	if (DeathParticle)
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation(), GetActorRotation());
+
+	if (DeathSound)
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 }
 
 void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
@@ -46,7 +48,6 @@ void ABasePawn::Fire()
 		ProjectileSpawnPoint->GetComponentRotation());
 
 	Projectile->SetOwner(this);
-	// DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(), 20, 20 , FColor::Red, false, 3.f);
 }
 
 
