@@ -4,6 +4,9 @@
 #include "BasePawn.h"
 #include "TankPawn.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class TOONTANKS_API ATankPawn : public ABasePawn
 {
@@ -17,16 +20,18 @@ public:
 
 	void HandleDestruction();
 	APlayerController* GetPlayerController() const;
+
+	bool bAlive;
 	
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	class USpringArmComponent* SpringArmComp;
+	USpringArmComponent* SpringArmComp;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	class UCameraComponent* CameraComp;
+	UCameraComponent* CameraComp;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float Speed;

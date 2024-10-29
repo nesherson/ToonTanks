@@ -12,7 +12,8 @@ ATankPawn::ATankPawn()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComp->SetupAttachment(SpringArmComp);
 	Speed = 100;
-	TurnRate = 65; 
+	TurnRate = 65;
+	bAlive = true;
 }
 
 void ATankPawn::BeginPlay()
@@ -42,6 +43,7 @@ void ATankPawn::HandleDestruction()
 	Super::HandleDestruction();
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	bAlive = false;
 }
 
 APlayerController* ATankPawn::GetPlayerController() const

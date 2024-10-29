@@ -4,6 +4,9 @@
 #include "GameFramework/GameModeBase.h"
 #include "ToonTanksGameMode.generated.h"
 
+class ATankPawn;
+class AToonTanksPlayerController;
+
 UCLASS()
 class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 {
@@ -24,8 +27,8 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	class ATankPawn* TankPawn;
-	class AToonTanksPlayerController* ToonTanksPlayerController;
+	ATankPawn* TankPawn;
+	AToonTanksPlayerController* ToonTanksPlayerController;
 	float StartDelay;
 	int32 TargetTurrets;
 

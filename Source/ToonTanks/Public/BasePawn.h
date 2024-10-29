@@ -2,6 +2,8 @@
 
 #include "BasePawn.generated.h"
 
+class UCapsuleComponent;
+
 UCLASS()
 class TOONTANKS_API ABasePawn : public APawn
 {
@@ -18,7 +20,7 @@ protected:
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess=true))
-	class UCapsuleComponent* CapsuleComp;
+	UCapsuleComponent* CapsuleComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components",meta = (AllowPrivateAccess=true))
 	UStaticMeshComponent* BaseMeshComp;

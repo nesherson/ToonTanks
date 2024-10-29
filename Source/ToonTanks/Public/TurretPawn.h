@@ -4,6 +4,8 @@
 #include "BasePawn.h"
 #include "TurretPawn.generated.h"
 
+class ATankPawn;
+
 UCLASS()
 class TOONTANKS_API ATurretPawn : public ABasePawn
 {
@@ -23,7 +25,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float FireRange;
 
-	class ATankPawn* TankPawnRef;
+	class ATankPawn* TankPawn;
 	FTimerHandle FireRateTimerHandle;
 	float FireRate;
 	
