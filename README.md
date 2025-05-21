@@ -1,3 +1,3 @@
 # ToonTanks
 
-Developed with Unreal Engine 5
+A simple tank game developed with Unreal Engine 5.
